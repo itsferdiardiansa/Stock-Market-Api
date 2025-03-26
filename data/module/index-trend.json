@@ -1,0 +1,55 @@
+{
+    "indexTrend": {
+        "maxAge": 1,
+        "symbol": "SP5",
+        "peRatio": {
+            "raw": 17.3253,
+            "fmt": "17.33"
+        },
+        "pegRatio": {
+            "raw": 4.55732,
+            "fmt": "4.56"
+        },
+        "estimates": [
+            {
+                "period": "0q",
+                "growth": {
+                    "raw": -0.148,
+                    "fmt": "-0.15"
+                }
+            },
+            {
+                "period": "+1q",
+                "growth": {
+                    "raw": -0.107,
+                    "fmt": "-0.11"
+                }
+            },
+            {
+                "period": "0y",
+                "growth": {
+                    "raw": -0.102,
+                    "fmt": "-0.10"
+                }
+            },
+            {
+                "period": "+1y",
+                "growth": {
+                    "raw": 0.19,
+                    "fmt": "0.19"
+                }
+            },
+            {
+                "period": "+5y",
+                "growth": {
+                    "raw": 0.0532196,
+                    "fmt": "0.05"
+                }
+            },
+            {
+                "period": "-5y",
+                "growth": []
+            }
+        ]
+    }
+}

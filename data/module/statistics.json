@@ -1,0 +1,155 @@
+{
+    "defaultKeyStatistics": {
+        "maxAge": 1,
+        "priceHint": {
+            "raw": 2,
+            "fmt": "2",
+            "longFmt": "2"
+        },
+        "enterpriseValue": {
+            "raw": 1265570545664,
+            "fmt": "1.27T",
+            "longFmt": "1,265,570,545,664"
+        },
+        "forwardPE": {
+            "raw": 18.924152,
+            "fmt": "18.92"
+        },
+        "profitMargins": {
+            "raw": 0.21490999,
+            "fmt": "21.49%"
+        },
+        "floatShares": {
+            "raw": 4370491953,
+            "fmt": "4.37B",
+            "longFmt": "4,370,491,953"
+        },
+        "sharesOutstanding": {
+            "raw": 4375479808,
+            "fmt": "4.38B",
+            "longFmt": "4,375,479,808"
+        },
+        "sharesShort": {
+            "raw": 39059449,
+            "fmt": "39.06M",
+            "longFmt": "39,059,449"
+        },
+        "sharesShortPriorMonth": {
+            "raw": 29008504,
+            "fmt": "29.01M",
+            "longFmt": "29,008,504"
+        },
+        "sharesShortPreviousMonthDate": {
+            "raw": 1582848000,
+            "fmt": "2020-02-28"
+        },
+        "dateShortInterest": {
+            "raw": 1585612800,
+            "fmt": "2020-03-31"
+        },
+        "sharesPercentSharesOut": {
+            "raw": 0.0089,
+            "fmt": "0.89%"
+        },
+        "heldPercentInsiders": {
+            "raw": 0.00066,
+            "fmt": "0.07%"
+        },
+        "heldPercentInstitutions": {
+            "raw": 0.61763,
+            "fmt": "61.76%"
+        },
+        "shortRatio": {
+            "raw": 0.55,
+            "fmt": "0.55"
+        },
+        "shortPercentOfFloat": {
+            "raw": 0.0089,
+            "fmt": "0.89%"
+        },
+        "beta": {
+            "raw": 1.173542,
+            "fmt": "1.17"
+        },
+        "morningStarOverallRating": [],
+        "morningStarRiskRating": [],
+        "category": null,
+        "bookValue": {
+            "raw": 20.418,
+            "fmt": "20.42"
+        },
+        "priceToBook": {
+            "raw": 13.930356,
+            "fmt": "13.93"
+        },
+        "annualReportExpenseRatio": [],
+        "ytdReturn": [],
+        "beta3Year": [],
+        "totalAssets": [],
+        "yield": [],
+        "fundFamily": null,
+        "fundInceptionDate": [],
+        "legalType": null,
+        "threeYearAverageReturn": [],
+        "fiveYearAverageReturn": [],
+        "priceToSalesTrailing12Months": [],
+        "lastFiscalYearEnd": {
+            "raw": 1569628800,
+            "fmt": "2019-09-28"
+        },
+        "nextFiscalYearEnd": {
+            "raw": 1632787200,
+            "fmt": "2021-09-28"
+        },
+        "mostRecentQuarter": {
+            "raw": 1577491200,
+            "fmt": "2019-12-28"
+        },
+        "earningsQuarterlyGrowth": {
+            "raw": 0.114,
+            "fmt": "11.40%"
+        },
+        "revenueQuarterlyGrowth": [],
+        "netIncomeToCommon": {
+            "raw": 57527001088,
+            "fmt": "57.53B",
+            "longFmt": "57,527,001,088"
+        },
+        "trailingEps": {
+            "raw": 12.595,
+            "fmt": "12.60"
+        },
+        "forwardEps": {
+            "raw": 15.03,
+            "fmt": "15.03"
+        },
+        "pegRatio": {
+            "raw": 1.93,
+            "fmt": "1.93"
+        },
+        "lastSplitFactor": "7:1",
+        "lastSplitDate": {
+            "raw": 1402272000,
+            "fmt": "2014-06-09"
+        },
+        "enterpriseToRevenue": {
+            "raw": 4.728,
+            "fmt": "4.73"
+        },
+        "enterpriseToEbitda": {
+            "raw": 16.2,
+            "fmt": "16.20"
+        },
+        "52WeekChange": {
+            "raw": 0.41313434,
+            "fmt": "41.31%"
+        },
+        "SandP52WeekChange": {
+            "raw": -0.018752217,
+            "fmt": "-1.88%"
+        },
+        "lastDividendValue": [],
+        "lastCapGain": [],
+        "annualHoldingsTurnover": []
+    }
+}
