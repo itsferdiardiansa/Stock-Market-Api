@@ -10,7 +10,7 @@
     "Yahoo Finance API"
   ],
   "author": "Ferdi Ardiansa",
-  "license": "ISC",
+  "license": "MIT",
   "_moduleAliases": {
     "@": ".",
     "@utils": "./utils",

@@ -1,8 +1,8 @@
-# 📈 Fake Stock Market API  
+# Stock Market API  
 
-![Node.js](https://img.shields.io/badge/Node.js-18.x-green?logo=node.js) ![Express.js](https://img.shields.io/badge/Express.js-4.x-black?logo=express) ![JSON Server](https://img.shields.io/badge/JSON%20Server-1.0.0-red?logo=json) ![RapidAPI](https://img.shields.io/badge/RapidAPI-Stock%20Data-blue?logo=rapidapi) ![Dotenv](https://img.shields.io/badge/Dotenv-16.x-yellowgreen?logo=dotenv)  
+![Node.js](https://img.shields.io/badge/Node.js-18.x-green?logo=node.js) ![Express.js](https://img.shields.io/badge/Express.js-4.x-black?logo=express) ![JSON Server](https://img.shields.io/badge/JSON%20Server-1.0.0-red?logo=json) ![Dotenv](https://img.shields.io/badge/Dotenv-16.x-yellowgreen?logo=dotenv)  
 
-A  fake **Stock Market API** powered by **Node.js**, **Express**, and **JSON Server**, designed to fetch real-time and historical stock market data using **Yahoo Finance API** from **RapidAPI**.
+A  fake **Stock Market API** powered by **Node.js** and **Express**,, designed to fetch real-time and historical stock market data using **FMP API**.
 
 ## ✨ Features  
 - Retrieve **financial statistics**, **earnings**, and **historical trends**  
@@ -32,7 +32,7 @@ cd stock-market-api
 
 **1️⃣ Clone the Repository**
 ```
-git clone https://github.com/your-username/stock-market-api.git
+git clone https://github.com/itsferdiardiansa/stock-market-api.git
 cd stock-market-api
 ```
 
