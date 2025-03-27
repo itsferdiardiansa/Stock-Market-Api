@@ -2,7 +2,7 @@ const axios = require("axios")
 const crypto = require("crypto")
 const zlib = require("zlib")
 const axiosThrottle = require("axios-request-throttle").default
-const { getRedisClient } = require("../config/redis")
+const { getRedisClient } = require("@config/redis")
 
 const API_URL = process.env.API_URL
 const API_KEY = process.env.API_KEY

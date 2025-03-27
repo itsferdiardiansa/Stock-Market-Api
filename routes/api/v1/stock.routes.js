@@ -1,6 +1,6 @@
 const express = require("express")
-const { fetchData } = require("../../../utils/fetcher")
-const { createResponse } = require("../../../utils/response")
+const { fetchData } = require("@utils/fetcher")
+const { createResponse } = require("@utils/response")
 
 const router = express.Router()
 

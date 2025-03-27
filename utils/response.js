@@ -1,5 +1,5 @@
 const { v4: uuidv4 } = require("uuid")
-const pkgJson = require("../package.json")
+const pkgJson = require("@/package.json")
 
 const STATUS_MESSAGES = {
   200: "Success",
