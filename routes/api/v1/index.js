@@ -1,8 +1,8 @@
 const express = require("express")
-const stockRoutes = require("./stock.routes")
+const stockRoutes = require("./stock/stock.routes")
 
 const router = express.Router()
 
-router.use(stockRoutes)
+router.use("/stock", stockRoutes)
 
 module.exports = router

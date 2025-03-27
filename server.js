@@ -9,8 +9,8 @@ dotenv.config()
 connectRedis()
 
 const apiV1Routes = require("./routes")
-const notFoundHandler = require("./middlewares/notFound.middleware")
-const errorHandler = require("./middlewares/errorHandler.middleware")
+const notFoundHandler = require("./middlewares/notFound")
+const errorHandler = require("./middlewares/errorHandler")
 
 const PORT = process.env.APP_PORT
 const app = express()

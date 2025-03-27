@@ -47,7 +47,8 @@ const fetchData = async (endpoint, params = {}) => {
   const queryPart = JSON.stringify(params) || "no-query"
   const queryHash = crypto.createHash("md5").update(queryPart).digest("hex")
   const cacheKey = `api_cache:${endpoint}:${queryHash}`
-  
+   
+  console.log("params: ", params)
   try {
     const cachedData = await redisClient.get(cacheKey)
     
@@ -56,8 +57,6 @@ const fetchData = async (endpoint, params = {}) => {
       const parsedData = JSON.parse(decompressedData)
 
       const staleTime = Date.now() - parsedData.cachedAt
-      
-      console.log("cache: ", parsedData.cachedAt)
       
       return fetchResponse(parsedData.data, { 
         cache: true,
@@ -76,10 +75,12 @@ const fetchData = async (endpoint, params = {}) => {
 
     return fetchResponse(response.data)
   } catch (error) {
+    const responseData = error.response.data ?? {}
+    const message = typeof responseData === "object" ? Object.values(responseData) : responseData
     throw ({
       status: error.status,
       ...fetchResponse({
-        message: Object.values(error.response.data) ?? error.message
+        message: message ?? error.message
       })
     })
   }
