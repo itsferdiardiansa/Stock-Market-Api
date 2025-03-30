@@ -1,22 +1,29 @@
 {
   "name": "stock-market-eye-api",
   "version": "1.0.0",
-  "description": "Fake API for stock market eye taken from Yahoo Finance API",
-  "main": "index.js",
+  "description": "Finance API for Stock Market Eye taken from Financial Modeling Prep API",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
   },
   "keywords": [
-    "Yahoo Finance API"
+    "Finance API",
+    "node",
+    "express",
+    "redis"
   ],
-  "author": "Ferdi Ardiansa",
+  "author": {
+    "email": "ferdiardiansa@gmail.com",
+    "name": "Ferdi Ardiansa"
+  },
   "license": "MIT",
   "_moduleAliases": {
     "@": ".",
-    "@utils": "./utils",
-    "@routes": "./routes",
     "@config": "./config",
-    "@middlewares": "./middlewares"
+    "@controllers": "./controllers",
+    "@middlewares": "./middlewares",
+    "@routes": "./routes",
+    "@utils": "./utils"
   },
   "dependencies": {
     "axios": "^1.8.4",
