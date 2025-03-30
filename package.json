@@ -21,6 +21,7 @@
     "@": ".",
     "@config": "./config",
     "@controllers": "./controllers",
+    "@constants": "./constants",
     "@middlewares": "./middlewares",
     "@routes": "./routes",
     "@utils": "./utils"

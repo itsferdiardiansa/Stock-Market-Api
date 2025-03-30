@@ -9,7 +9,7 @@ const API_KEY = process.env.API_KEY
 const CACHE_TIME = process.env.CACHE_TIME || 86400
 
 if (!API_URL || !API_KEY) {
-  console.error("❌ API_URL atau API_KEY are not provided in .env")
+  console.error("API_URL atau API_KEY are not provided in .env")
   process.exit(1)
 }
 
@@ -39,7 +39,7 @@ const fetchResponse = (data, metaResponse = { cache: false, staleTime: 0 }) => (
 /**
  * Utility for requesting data from API with Redis
  */
-const fetchData = async (endpoint, params = {}) => {
+const fetchData = async (endpoint, params = {}, cacheTime = CACHE_TIME) => {
   const redisClient = getRedisClient()
   
   params.apikey = API_KEY
@@ -47,8 +47,7 @@ const fetchData = async (endpoint, params = {}) => {
   const queryPart = JSON.stringify(params) || "no-query"
   const queryHash = crypto.createHash("md5").update(queryPart).digest("hex")
   const cacheKey = `api_cache:${endpoint}:${queryHash}`
-   
-  console.log("params: ", params)
+  
   try {
     const cachedData = await redisClient.get(cacheKey)
     
@@ -71,7 +70,7 @@ const fetchData = async (endpoint, params = {}) => {
     }
 
     const compressedData = zlib.gzipSync(JSON.stringify(payload)).toString("base64")
-    await redisClient.setEx(cacheKey, CACHE_TIME, compressedData)
+    await redisClient.setEx(cacheKey, cacheTime, compressedData)
 
     return fetchResponse(response.data)
   } catch (error) {
@@ -89,11 +88,11 @@ const fetchData = async (endpoint, params = {}) => {
 // Request Interceptors
 apiClient.interceptors.request.use(
   (config) => {
-    console.log(`📡 Fetching: ${config.baseURL}${config.url}`)
+    console.log(`Fetching: ${config.baseURL}${config.url}`)
     return config
   },
   (error) => {
-    console.error("❌ Request Error:", error.message)
+    console.error("Request Error:", error.message)
     return Promise.reject(error)
   }
 )
@@ -103,7 +102,7 @@ apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (error.response?.status === 429) {
-      console.warn("⚠️ Rate Limit Exceeded. Retrying in 2 seconds...")
+      console.warn("Rate Limit Exceeded. Retrying in 2 seconds...")
       await new Promise((res) => setTimeout(res, 2000))
       return apiClient.request(error.config)
     }
