@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "description": "Finance API for Stock Market Eye taken from Financial Modeling Prep API",
   "main": "server.js",
+  "license": "MIT",
   "scripts": {
-    "start": "nodemon server.js"
+    "preinstall": "npx only-allow pnpm",
+    "prepare": "husky",
+    "start": "nodemon server.js",
+    "format": "prettier . --check",
+    "format:write": "prettier . --write"
   },
   "keywords": [
     "Finance API",
@@ -16,7 +21,6 @@
     "email": "ferdiardiansa@gmail.com",
     "name": "Ferdi Ardiansa"
   },
-  "license": "MIT",
   "_moduleAliases": {
     "@": ".",
     "@config": "./config",
@@ -36,7 +40,14 @@
     "uuid": "^11.1.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "eslint": "^9.23.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0",
     "module-alias": "^2.2.3",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "prettier": "^3.5.3",
+    "simple-git-hooks": "^2.12.1"
   }
 }
