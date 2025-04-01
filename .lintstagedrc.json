@@ -1,5 +1,3 @@
 {
-  "**/*.{js,ts}": [
-    "pnpm format"
-  ]
+  "**/*.{js,ts}": ["eslint", "prettier ."]
 }
