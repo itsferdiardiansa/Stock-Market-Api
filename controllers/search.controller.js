@@ -1,4 +1,4 @@
-const { handleRequest } = require("@utils/handleFMPRequest")
+const { handleRequest } = require("@utils/fmpApiClient")
 
 /**
  * Easily find the ticker symbol of any stock with the FMP Stock Symbol Search API. 

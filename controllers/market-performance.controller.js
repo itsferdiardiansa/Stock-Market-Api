@@ -1,4 +1,4 @@
-const { handleRequest } = require("@utils/handleFMPRequest")
+const { handleRequest } = require("@utils/fmpApiClient")
 
 /**
  * View the most actively traded stocks using the Top Traded Stocks API. 
@@ -63,6 +63,53 @@ const getIndustryPerformanceSnapshot = async (req, res) => {
   await handleRequest(res, "industry-performance-snapshot", { ...query })
 }
 
+/**
+ * Access historical sector performance data using the Historical Market Sector Performance API. 
+ * Review how different sectors have performed over time across various stock exchanges.
+ *
+ * @Request
+ * @query {from} [date]
+ * @query {to} [date]
+ * @query {string} [exchange] - untilExchanges limited to NASDAQ, NYSE, AMEX.
+ * @query {string} [sector].
+ */
+const getHistoricalSectorPerformance = async (req, res) => {
+  const { query } = req
+
+  await handleRequest(res, "historical-sector-performance", { ...query })
+}
+
+/**
+ * Access historical performance data for industries using the Historical Industry Performance API. 
+ * Track long-term trends and analyze how different industries have evolved over time across various stock exchanges.
+ *
+ * @Request
+ * @query {from} [date]
+ * @query {to} [date]
+ * @query {string} [exchange] - untilExchanges limited to NASDAQ, NYSE, AMEX.
+ * @query {string} [industry].
+ */
+const getHistoricalIndustryPerformance = async (req, res) => {
+  const { query } = req
+
+  await handleRequest(res, "historical-industry-performance", { ...query })
+}
+
+/**
+ * Retrieve the price-to-earnings (P/E) ratios for various sectors using the Sector P/E Snapshot API. 
+ * Compare valuation levels across sectors to better understand market valuations.
+ *
+ * @Request
+ * @query {date} [date]
+ * @query {string} [exchange] - untilExchanges limited to NASDAQ, NYSE, AMEX.
+ * @query {string} [sector].
+ */
+const getSectorPESnapshot = async (req, res) => {
+  const { query } = req
+
+  await handleRequest(res, "sector-pe-snapshot", { ...query })
+}
+
 const getBeneficialOwnership = async (req, res) => {
   const { query } = req
 
@@ -76,5 +123,8 @@ module.exports = {
   getBiggestGainers,
   getBeneficialOwnership,
   getSectorPerformanceSnapshot,
-  getIndustryPerformanceSnapshot
+  getIndustryPerformanceSnapshot,
+  getHistoricalSectorPerformance,
+  getHistoricalIndustryPerformance,
+  getSectorPESnapshot
 }

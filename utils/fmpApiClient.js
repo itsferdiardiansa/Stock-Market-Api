@@ -10,7 +10,7 @@ const { createResponse } = require("./response")
  */
 const handleRequest = async (res, endpoint, params = {}) => {
   try {
-    const response = await fetchData(endpoint, params)
+    const response = await fetchData(endpoint, params, "fmp_cache")
     res.json(createResponse(200, response))
   } catch (error) {
     const statusCode = error.status || 500

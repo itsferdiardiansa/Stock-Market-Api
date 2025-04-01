@@ -3,6 +3,7 @@ const crypto = require("crypto")
 const zlib = require("zlib")
 const axiosThrottle = require("axios-request-throttle").default
 const { getRedisClient } = require("@config/redis")
+const { decryptData, encryptData } = require("./encryption")
 
 const API_URL = process.env.API_URL
 const API_KEY = process.env.API_KEY
@@ -30,7 +31,7 @@ axiosThrottle.use(apiClient, { requestsPerSecond: 5 })
  */
 const fetchResponse = (data, metaResponse = { cache: false, staleTime: 0 }) => ({
   meta: {
-    timestamp: new Date().toISOString(),
+    timestamp: +new Date(),
     ...metaResponse
   },
   body: data,
@@ -39,26 +40,33 @@ const fetchResponse = (data, metaResponse = { cache: false, staleTime: 0 }) => (
 /**
  * Utility for requesting data from API with Redis
  */
-const fetchData = async (endpoint, params = {}, cacheTime = CACHE_TIME) => {
+const fetchData = async (
+  endpoint, 
+  params = {}, 
+  cachePrefix = 'api_cache', 
+  cacheTime = CACHE_TIME
+) => {
   const redisClient = getRedisClient()
   
   params.apikey = API_KEY
   
   const queryPart = JSON.stringify(params) || "no-query"
-  const queryHash = crypto.createHash("md5").update(queryPart).digest("hex")
-  const cacheKey = `api_cache:${endpoint}:${queryHash}`
+  const queryHash = crypto.createHash("sha256").update(queryPart).digest("hex")
+  const cacheKey = `${cachePrefix}:${endpoint}:${queryHash}`
   
   try {
     const cachedData = await redisClient.get(cacheKey)
     
     if (cachedData) {
-      const decompressedData = zlib.gunzipSync(Buffer.from(cachedData, "base64")).toString()
+      const decryptedData = decryptData(cachedData)
+      const decompressedData = zlib.gunzipSync(Buffer.from(decryptedData, "base64")).toString()
       const parsedData = JSON.parse(decompressedData)
 
       const staleTime = Date.now() - parsedData.cachedAt
       
       return fetchResponse(parsedData.data, { 
         cache: true,
+        lastUpdated: new Date(parsedData.cachedAt).toLocaleString(),
         staleTime
       })
     }
@@ -70,15 +78,18 @@ const fetchData = async (endpoint, params = {}, cacheTime = CACHE_TIME) => {
     }
 
     const compressedData = zlib.gzipSync(JSON.stringify(payload)).toString("base64")
-    await redisClient.setEx(cacheKey, cacheTime, compressedData)
+    const encryptedData = encryptData(compressedData)
+    await redisClient.setEx(cacheKey, cacheTime, encryptedData)
 
     return fetchResponse(response.data)
   } catch (error) {
-    const responseData = error.response.data ?? {}
+    console.log("ERROR: ", error)
+    const responseData = error.response?.data
     const message = typeof responseData === "object" ? Object.values(responseData) : responseData
     throw ({
       status: error.status,
       ...fetchResponse({
+        code: error?.code ?? null,
         message: message ?? error.message
       })
     })
@@ -88,7 +99,7 @@ const fetchData = async (endpoint, params = {}, cacheTime = CACHE_TIME) => {
 // Request Interceptors
 apiClient.interceptors.request.use(
   (config) => {
-    console.log(`Fetching: ${config.baseURL}${config.url}`)
+    console.log(`Fetching: ${config.baseURL}/${config.url}`)
     return config
   },
   (error) => {
