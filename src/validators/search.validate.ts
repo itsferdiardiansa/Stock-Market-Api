@@ -1,9 +1,9 @@
-const Joi = require("joi")
+import Joi from 'joi'
 
 const searchSymbolSchema = Joi.object({
   query: Joi.string().trim().min(1).required().messages({
-    "any.required": "missing query parameter"
-  })
+    'any.required': 'missing query parameter',
+  }),
 })
 
 const companyScreenerSchema = Joi.object({
@@ -22,7 +22,7 @@ const companyScreenerSchema = Joi.object({
   country: Joi.string().trim(),
   isEtf: Joi.boolean(),
   isFund: Joi.boolean(),
-  isActivelyTrading: Joi.boolean()
+  isActivelyTrading: Joi.boolean(),
 })
 
-module.exports = { searchSymbolSchema, companyScreenerSchema }
+export { searchSymbolSchema, companyScreenerSchema }

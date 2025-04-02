@@ -7,11 +7,12 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",
-    "start": "nodemon server.js",
+    "dev": "NODE_OPTIONS='--no-warnings' ts-node scripts/dev.ts",
     "format": "prettier . --check",
     "format:write": "prettier . --write",
     "lint": "eslint",
-    "lint:fix": "pnpm lint --fix"
+    "lint:fix": "pnpm lint --fix",
+    "type-check": "tsc --noEmit --diagnostics"
   },
   "keywords": [
     "Finance API",
@@ -23,20 +24,16 @@
     "email": "ferdiardiansa@gmail.com",
     "name": "Ferdi Ardiansa"
   },
-  "_moduleAliases": {
-    "@": ".",
-    "@config": "./config",
-    "@controllers": "./controllers",
-    "@constants": "./constants",
-    "@middlewares": "./middlewares",
-    "@routes": "./routes",
-    "@utils": "./utils"
+  "engines": {
+    "node": ">=23"
   },
   "dependencies": {
+    "@redis/graph": "^1.1.1",
     "axios": "^1.8.4",
     "axios-request-throttle": "^1.0.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "figlet": "^1.8.0",
     "joi": "^17.13.3",
     "redis": "^4.7.0",
     "uuid": "^11.1.0"
@@ -45,14 +42,29 @@
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
     "@eslint/js": "^9.23.0",
+    "@redis/client": "^1.6.0",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.16",
+    "@types/qs": "^6.9.18",
+    "@typescript-eslint/eslint-plugin": "^8.29.0",
+    "@typescript-eslint/parser": "^8.29.0",
+    "chalk": "^5.4.1",
+    "chokidar": "^4.0.3",
+    "cross-spawn": "^7.0.6",
     "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-perfectionist": "^4.10.1",
+    "eslint-plugin-prettier": "^5.2.5",
     "globals": "^16.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.0",
     "module-alias": "^2.2.3",
     "nodemon": "^3.1.9",
     "prettier": "^3.5.3",
-    "simple-git-hooks": "^2.12.1"
+    "qs": "^6.14.0",
+    "simple-git-hooks": "^2.12.1",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.8.2"
   }
 }
