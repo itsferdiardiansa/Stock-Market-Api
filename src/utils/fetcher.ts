@@ -44,9 +44,8 @@ const fetchResponse = <TData = {}>(
   metaResponse?: Pick<ResponseMeta, 'lastUpdated' | 'staleTime' | 'cache' | 'timestamp'>
 ): FetchResponse<TData> => ({
   meta: {
-    timestamp: +new Date(),
     cache: false,
-    staleTime: false,
+    staleTime: 0,
     ...metaResponse,
   },
   body: data,

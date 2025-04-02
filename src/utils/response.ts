@@ -32,14 +32,14 @@ export const STATUS_MESSAGES = {
 
 export type StatusMessages = keyof typeof STATUS_MESSAGES
 export type ResponseMeta = {
+  _id: ReturnType<typeof uuidv4>
   cache: boolean
   staleTime: number
   status: StatusMessages
   message: string
-  requestId: string
   version: string
-  timestamp: number
   lastUpdated: string
+  timestamp?: number
   rateLimit?: number | null
 }
 
@@ -48,12 +48,12 @@ export type CustomResponse = {
   body?: Record<string, string>
 }
 
-export const createResponse = (status: number, response: CustomResponse = {}, rateLimit = null) => {
+export const createResponse = (statusCode: number, response: CustomResponse = {}, rateLimit = null): CustomResponse => {
   return {
     meta: {
-      status,
-      message: STATUS_MESSAGES[status],
-      requestId: uuidv4(),
+      _id: uuidv4(),
+      status: statusCode,
+      message: STATUS_MESSAGES[statusCode],
       version: pkgJson.version,
       ...response.meta,
       ...(rateLimit && { rateLimit }),
