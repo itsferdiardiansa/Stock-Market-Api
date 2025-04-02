@@ -18,6 +18,7 @@ const EXCHANGE_LIST = ['NASDAQ', 'NYSE', 'AMEX']
 
 // ================== Schema ==========================
 
+// Market Performance
 export const beneficialOwnershipSchema = Joi.object({
   symbol: Joi.string()
     .trim()
@@ -108,17 +109,8 @@ export const historicalIndustryPerformanceSchema = Joi.object({
     }),
 })
 
-export const sectorPESnapshotSchema = Joi.object({
-  date: Joi.string()
-    .pattern(DATE_PATTERN) // format YYYY-MM-DD
-    .required()
-    .custom(validateDateRange(TODAY, TOMORROW))
-    .messages({
-      'string.pattern.base': 'Date format must be YYYY-MM-DD.',
-      'any.invalid': `Date must be between ${TODAY} and ${TOMORROW}.`,
-    }),
-  sector: Joi.string().trim(),
-  exchange: Joi.string()
-    .trim()
-    .valid(...EXCHANGE_LIST),
-})
+// PE Ratio
+export const sectorPESnapshotSchema = sectorPerformanceSnapshotSchema
+export const industryPESnapshotSchema = industryPerformanceSnapshotSchema
+export const historicalSectorPESchema = historicalSectorPerformanceSchema
+export const historicalIndustryPESchema = historicalIndustryPerformanceSchema

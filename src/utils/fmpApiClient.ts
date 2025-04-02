@@ -1,7 +1,16 @@
 import type { Response } from 'express'
 import { ParsedQs } from 'qs'
 import { fetchData } from './fetcher'
-import { createResponse, type CustomResponse } from './response'
+import { createResponse } from './response'
+import type { ApiCustomResponse } from '@/types/api'
+import platformConfig from '@/config/platform'
+
+const { apiUrl, apiKey, cacheTime } = platformConfig
+
+if (!apiUrl || !apiKey) {
+  console.error('API_URL or API_KEY are not provided in .env')
+  process.exit(1)
+}
 
 /**
  * Helper function to handle FMP API requests.
@@ -12,7 +21,13 @@ import { createResponse, type CustomResponse } from './response'
  */
 export const handleRequest = async (res: Response, endpoint: string, params: ParsedQs = {}) => {
   try {
-    const response = await fetchData(endpoint, params, 'fmp_cache') as CustomResponse
+    // Set FMP api key
+    params.apikey = apiKey
+
+    const response = (await fetchData(apiUrl, endpoint, params, {
+      prefix: 'fmp_cache',
+      time: cacheTime,
+    })) as ApiCustomResponse
     res.json(createResponse(200, response))
   } catch (error) {
     const statusCode = error.status || 500
