@@ -1,9 +1,9 @@
 import type { Response } from 'express'
 import { ParsedQs } from 'qs'
-import { fetchData } from './fetcher'
-import { createResponse } from './response'
-import type { ApiCustomResponse } from '@/types/api'
 import platformConfig from '@/config/platform'
+import { fetchData } from '@/utils/fetcher'
+import { createResponse } from '@/utils/response'
+import type { ApiCustomResponse } from '@/types/api'
 
 const { apiUrl, apiKey, cacheTime } = platformConfig
 

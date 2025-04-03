@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express'
-import { handleRequest } from '@/utils/fmpApiClient'
+import { handleRequest } from '@/services/fmpApiService'
 
 /**
  * Easily find the ticker symbol of any stock with the FMP Stock Symbol Search API.

@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express'
-import { handleRequest } from '@/utils/fmpApiClient'
+import { handleRequest } from '@/services/fmpApiService'
 
 /**
  * View the most actively traded stocks using the Top Traded Stocks API.
