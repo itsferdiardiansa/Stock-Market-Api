@@ -2,7 +2,7 @@
   "name": "stock-market-eye-api",
   "version": "1.0.0",
   "description": "Finance API for Stock Market Eye taken from Financial Modeling Prep API",
-  "main": "server.js",
+  "main": "src/server.ts",
   "license": "MIT",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
@@ -35,6 +35,8 @@
     "express": "^4.21.2",
     "figlet": "^1.8.0",
     "joi": "^17.13.3",
+    "pino": "^9.6.0",
+    "pino-pretty": "^13.0.0",
     "redis": "^4.7.0",
     "uuid": "^11.1.0"
   },

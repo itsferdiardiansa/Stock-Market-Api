@@ -4,11 +4,12 @@ import platformConfig from '@/config/platform'
 import { fetchData } from '@/utils/fetcher'
 import { createResponse } from '@/utils/response'
 import type { ApiCustomResponse } from '@/types/api'
+import logger from '@/utils/logger'
 
 const { apiUrl, apiKey, cacheTime } = platformConfig
 
 if (!apiUrl || !apiKey) {
-  console.error('API_URL or API_KEY are not provided in .env')
+  logger.error('API_URL or API_KEY are not provided in .env')
   process.exit(1)
 }
 

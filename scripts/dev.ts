@@ -1,17 +1,19 @@
 import { spawn } from 'child_process'
 import chalk from 'chalk'
 import chokidar from 'chokidar'
+import figlet from 'figlet'
+import pkgJson from '../package.json'
 
 const isWindows = process.platform === 'win32'
-const SCRIPT_FILE = './src/server.ts'
+const SCRIPT_FILE = pkgJson.main
 
-console.log(chalk.blue.bold('🚀 Dev server is starting...\n'))
+console.log(chalk.blue.bold('Dev server is starting...'))
 
 let nodemonProcess: any
 
 const runESLint = () => {
   return new Promise<void>(resolve => {
-    console.log(chalk.cyan('🔍 Linting...'))
+    console.log(chalk.cyan('Running ESLint...'))
 
     const eslintProcess = spawn(
       isWindows ? 'npx.cmd' : 'npx',
@@ -21,15 +23,15 @@ const runESLint = () => {
 
     eslintProcess.on('close', code => {
       if (code === 0) {
-        console.log(chalk.green('✅ No ESLint errors!\n'))
+        console.log(chalk.green('No ESLint errors!\n'))
       } else {
-        console.log(chalk.red('❌ ESLint found errors! Check above for details.\n'))
+        console.log(chalk.red('ESLint found errors! Check above for details.\n'))
       }
       resolve()
     })
 
     eslintProcess.on('error', err => {
-      console.error(chalk.red('❌ Error running ESLint:', err))
+      console.error(chalk.red('Error running ESLint:', err))
       resolve()
     })
   })
@@ -37,7 +39,7 @@ const runESLint = () => {
 
 const startNodemon = () => {
   if (nodemonProcess) {
-    console.log(chalk.yellow('♻️ Restarting server...\n'))
+    console.log(chalk.yellow('Restarting server...\n'))
     nodemonProcess.kill()
   }
 
@@ -56,13 +58,15 @@ const startNodemon = () => {
     ],
     { stdio: 'inherit' }
   )
-
+  
   nodemonProcess.on('error', err => {
     console.error(chalk.red('❌ Error starting Nodemon:', err))
   })
 }
 
 ;(async () => {
+  console.log(chalk.blue.bold(figlet.textSync('Stock Market Eye')))
+
   await runESLint()
   startNodemon()
 })()
@@ -71,18 +75,18 @@ chokidar
   .watch('./src', { ignored: /node_modules/, ignoreInitial: false })
   .on('change', async filePath => {
     console.clear()
-    console.log(chalk.magenta(`📝 File changed: ${filePath}`))
+    console.log(chalk.magenta(`File changed: ${filePath}`))
 
     await runESLint()
     startNodemon()
   })
   .on('error', error => {
     console.clear()
-    console.error(chalk.red('❌ File watcher error:', error))
+    console.error(chalk.red('File watcher error:', error))
   })
 
 const shutdown = () => {
-  console.log(chalk.yellow('\n🛑 Shutting down...'))
+  console.log(chalk.yellow('\nShutting down...'))
   if (nodemonProcess) nodemonProcess.kill()
   process.exit()
 }
