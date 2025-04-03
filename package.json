@@ -32,7 +32,7 @@
     "axios": "^1.8.4",
     "axios-request-throttle": "^1.0.0",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2",
+    "express": "^5.0.0",
     "figlet": "^1.8.0",
     "joi": "^17.13.3",
     "pino": "^9.6.0",
