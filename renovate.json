@@ -50,6 +50,6 @@
   
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": ["every 3 weeks"]
+    "schedule": ["* 5 1 * *"]
   }
 }
