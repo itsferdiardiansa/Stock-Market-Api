@@ -7,7 +7,7 @@ import {
   historicalSectorPerformanceSchema,
   historicalIndustryPerformanceSchema,
   sectorPESnapshotSchema,
-} from '@root/src/validators/marketPerformance.validate'
+} from '@root/src/validators/market-performance.validate'
 import {
   getMostActives,
   getBiggestLosers,
@@ -17,7 +17,7 @@ import {
   getHistoricalSectorPerformance,
   getHistoricalIndustryPerformance,
   getSectorPESnapshot,
-} from '@/controllers/marketPerformance.controller'
+} from '@/controllers/market-performance.controller'
 
 const router: Router = express.Router()
 

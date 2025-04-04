@@ -2,8 +2,8 @@ import express from 'express'
 import type { Express } from 'express'
 import { connectRedis } from './config/redis'
 
-import notFoundHandler from './middlewares/notFound'
-import errorHandler from './middlewares/errorHandler'
+import notFoundHandler from './middlewares/not-found'
+import errorHandler from './middlewares/error-handler'
 
 import apiV1Routes from './routes'
 

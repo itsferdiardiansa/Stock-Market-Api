@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express'
-import { handleRequest } from '@/services/fmpApiService'
+import { handleRequest } from '@root/src/services/fmp-api.service'
 
 /**
  * Search by company name or symbol across multiple global markets.

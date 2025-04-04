@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import { ParsedQs } from 'qs'
-import type { StatusMessages } from '@/constants/statusMessages'
+import type { StatusMessages } from '@root/src/constants/status-messages'
 
 export type ApiResponseMeta = {
   _id: ReturnType<typeof uuidv4>

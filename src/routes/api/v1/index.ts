@@ -1,6 +1,6 @@
 import express from 'express'
 
-import marketPerformanceRoutes from './marketPerformance.routes'
+import marketPerformanceRoutes from './market-performance.routes'
 import searchRoutes from './search.routes'
 
 const router = express.Router()

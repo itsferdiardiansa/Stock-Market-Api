@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import pkgJson from '@root/package.json'
-import { STATUS_MESSAGES } from '@/constants/statusMessages'
+import { STATUS_MESSAGES } from '@root/src/constants/status-messages'
 import { ApiCustomResponse } from '@/types/api'
 
 export const createResponse = (

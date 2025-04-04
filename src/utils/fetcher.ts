@@ -3,7 +3,7 @@ import zlib from 'zlib'
 import { getRedisClient } from '@/config/redis'
 import { decryptData, encryptData } from './encryption'
 import type { ApiResponseMetaFiltered, ApiFetchResponse } from '@/types/api'
-import APIClientFactory from './axiosInstance'
+import APIClientFactory from './axios-instance'
 import { ParsedQs } from 'qs'
 
 /**
