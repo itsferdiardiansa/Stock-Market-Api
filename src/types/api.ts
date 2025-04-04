@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
-import type { StatusMessages } from '@/constants/statusMessages'
 import { ParsedQs } from 'qs'
+import type { StatusMessages } from '@/constants/statusMessages'
 
 export type ApiResponseMeta = {
   _id: ReturnType<typeof uuidv4>
@@ -27,5 +27,5 @@ export type FetchDataParams = {
 
 export type ApiCustomResponse = {
   meta?: ApiResponseMeta
-  body?: Record<string, string>
+  body?: Record<string, string> | Record<string, string>[]
 }

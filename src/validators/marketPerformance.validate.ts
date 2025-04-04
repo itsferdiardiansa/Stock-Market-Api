@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import { ACQUISITION_OWNERSHIP_SYMBOLS } from '@/constants/symbols'
+import { ACQUISITION_OWNERSHIP_SYMBOLS, EXCHANGE_LIST } from '@/constants/symbols'
 import { getFirstDayOfMonth, getRelativeLocalDate } from '@/utils/date'
 
 const validateDateRange = (minDate: string, maxDate: string) => (value: string, helpers: Joi.CustomHelpers) => {
@@ -14,7 +14,6 @@ const TODAY = getRelativeLocalDate(0)
 const TOMORROW = getRelativeLocalDate(1)
 const THIS_MONTH = getFirstDayOfMonth()
 const ONE_MONTH_LATER = getRelativeLocalDate(30)
-const EXCHANGE_LIST = ['NASDAQ', 'NYSE', 'AMEX']
 
 // ================== Schema ==========================
 

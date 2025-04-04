@@ -22,7 +22,7 @@ function APIClientFactory() {
     // Request Interceptor
     apiClient.interceptors.request.use(
       config => {
-        logger.info(`Fetching: ${config.baseURL}${config.url}`)
+        logger.info(`Fetching: ${config.baseURL}/${config.url}`)
         return config
       },
       error => {
