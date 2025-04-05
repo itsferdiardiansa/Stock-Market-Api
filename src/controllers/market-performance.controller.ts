@@ -1,5 +1,7 @@
 import type { Request, Response } from 'express'
-import { handleRequest } from '@/services/fmp-api.service'
+import { fetchFmpData } from '@/services/fmp-api.service'
+import { sendResponse } from '@/utils/response'
+import { ValidatedRequest } from '@/types/validated-request'
 
 /**
  * View the most actively traded stocks using the Top Traded Stocks API.
@@ -8,8 +10,10 @@ import { handleRequest } from '@/services/fmp-api.service'
  * @param {Request} req
  * @param {Response} res
  */
-export const getMostActives = async (_: Request, res: Response) => {
-  await handleRequest(res, 'most-actives')
+export const getMostActives = async (req: Request, res: Response) => {
+  const data = await fetchFmpData('most-actives')
+
+  sendResponse(data, { req, res })
 }
 
 /**
@@ -19,8 +23,10 @@ export const getMostActives = async (_: Request, res: Response) => {
  * @param {Request} req
  * @param {Response} res
  */
-export const getBiggestLosers = async (_: Request, res: Response) => {
-  await handleRequest(res, 'biggest-losers')
+export const getBiggestLosers = async (req: Request, res: Response) => {
+  const data = await fetchFmpData('biggest-losers')
+
+  sendResponse(data, { req, res })
 }
 
 /**
@@ -30,8 +36,10 @@ export const getBiggestLosers = async (_: Request, res: Response) => {
  * @param {Request} req
  * @param {Response} res
  */
-export const getBiggestGainers = async (_: Request, res: Response) => {
-  await handleRequest(res, 'biggest-gainers')
+export const getBiggestGainers = async (req: Request, res: Response) => {
+  const data = await fetchFmpData('biggest-gainers')
+
+  sendResponse(data, { req, res })
 }
 
 /**
@@ -43,10 +51,11 @@ export const getBiggestGainers = async (_: Request, res: Response) => {
  * @query {string} [exchange] - untilExchanges limited to NASDAQ, NYSE, AMEX.
  * @query {string} [sector].
  */
-export const getSectorPerformanceSnapshot = async (req: Request, res: Response) => {
-  const { query } = req
+export const getSectorPerformanceSnapshot = async (req: ValidatedRequest, res: Response) => {
+  const { validatedQuery } = req
+  const data = await fetchFmpData('sector-performance-snapshot', { ...validatedQuery })
 
-  await handleRequest(res, 'sector-performance-snapshot', { ...query })
+  sendResponse(data, { req, res })
 }
 
 /**
@@ -58,10 +67,11 @@ export const getSectorPerformanceSnapshot = async (req: Request, res: Response) 
  * @query {string} [exchange] - untilExchanges limited to NASDAQ, NYSE, AMEX.
  * @query {string} [industry].
  */
-export const getIndustryPerformanceSnapshot = async (req: Request, res: Response) => {
-  const { query } = req
+export const getIndustryPerformanceSnapshot = async (req: ValidatedRequest, res: Response) => {
+  const { validatedQuery } = req
+  const data = await fetchFmpData('industry-performance-snapshot', { ...validatedQuery })
 
-  await handleRequest(res, 'industry-performance-snapshot', { ...query })
+  sendResponse(data, { req, res })
 }
 
 /**
@@ -74,10 +84,11 @@ export const getIndustryPerformanceSnapshot = async (req: Request, res: Response
  * @query {string} [exchange] - untilExchanges limited to NASDAQ, NYSE, AMEX.
  * @query {string} [sector].
  */
-export const getHistoricalSectorPerformance = async (req: Request, res: Response) => {
-  const { query } = req
+export const getHistoricalSectorPerformance = async (req: ValidatedRequest, res: Response) => {
+  const { validatedQuery } = req
+  const data = await fetchFmpData('historical-sector-performance', { ...validatedQuery })
 
-  await handleRequest(res, 'historical-sector-performance', { ...query })
+  sendResponse(data, { req, res })
 }
 
 /**
@@ -90,10 +101,11 @@ export const getHistoricalSectorPerformance = async (req: Request, res: Response
  * @query {string} [exchange] - untilExchanges limited to NASDAQ, NYSE, AMEX.
  * @query {string} [industry].
  */
-export const getHistoricalIndustryPerformance = async (req: Request, res: Response) => {
-  const { query } = req
+export const getHistoricalIndustryPerformance = async (req: ValidatedRequest, res: Response) => {
+  const { validatedQuery } = req
+  const data = await fetchFmpData('historical-industry-performance', { ...validatedQuery })
 
-  await handleRequest(res, 'historical-industry-performance', { ...query })
+  sendResponse(data, { req, res })
 }
 
 /**
@@ -105,14 +117,16 @@ export const getHistoricalIndustryPerformance = async (req: Request, res: Respon
  * @query {string} [exchange] - untilExchanges limited to NASDAQ, NYSE, AMEX.
  * @query {string} [sector].
  */
-export const getSectorPESnapshot = async (req: Request, res: Response) => {
-  const { query } = req
+export const getSectorPESnapshot = async (req: ValidatedRequest, res: Response) => {
+  const { validatedQuery } = req
+  const data = await fetchFmpData('sector-pe-snapshot', { ...validatedQuery })
 
-  await handleRequest(res, 'sector-pe-snapshot', { ...query })
+  sendResponse(data, { req, res })
 }
 
-export const getBeneficialOwnership = async (req: Request, res: Response) => {
-  const { query } = req
+export const getBeneficialOwnership = async (req: ValidatedRequest, res: Response) => {
+  const { validatedQuery } = req
+  const data = await fetchFmpData('acquisition-of-beneficial-ownership', { ...validatedQuery })
 
-  await handleRequest(res, 'acquisition-of-beneficial-ownership', { ...query })
+  sendResponse(data, { req, res })
 }

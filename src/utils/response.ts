@@ -1,22 +1,47 @@
-import { v4 as uuidv4 } from 'uuid'
+import type { Response, Request } from 'express'
 import pkgJson from '@root/package.json'
-import { STATUS_MESSAGES } from '@root/src/constants/status-messages'
-import { ApiCustomResponse } from '@/types/api'
+import { STATUS_MESSAGES } from '@/constants/status-messages'
+import type { ApiCustomResponse, StatusCodes } from '@/types/api'
 
-export const createResponse = (
-  statusCode: number,
-  response: ApiCustomResponse = {},
-  rateLimit = null
+export const formatResponse = (
+  statusCode: StatusCodes,
+  responseData: ApiCustomResponse = {},
+  options?: {
+    rateLimit?: Record<string, any>
+    requestId?: string
+  }
 ): ApiCustomResponse => {
   return {
     meta: {
-      _id: uuidv4(),
       status: statusCode,
       message: STATUS_MESSAGES[statusCode],
+      cache: false,
+      staleTime: 0,
+      lastUpdated: null,
       version: pkgJson.version,
-      ...response.meta,
-      ...(rateLimit && { rateLimit }),
+      ...responseData.meta,
+      ...(options?.rateLimit && { rateLimit: options.rateLimit }),
     },
-    body: response.body,
+    body: responseData.body ?? {},
   }
+}
+
+export const sendResponse = (
+  responseData: ApiCustomResponse = {},
+  params: {
+    req: Request
+    res: Response
+  }
+) => {
+  const { res } = params
+  const requestId = res.locals.requestId
+  const { meta, body } = responseData
+
+  res.status(meta.status).json({
+    meta: {
+      _id: requestId,
+      ...meta,
+    },
+    body,
+  })
 }

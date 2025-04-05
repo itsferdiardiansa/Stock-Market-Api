@@ -4,6 +4,7 @@ dotenv.config()
 type PlatformConfig = {
   port: number
   nodeEnv: string
+  isProduction: boolean
 
   encryptionAlgorithm: string
   encryptionKey: string
@@ -17,11 +18,17 @@ type PlatformConfig = {
 
   newRelicLogApi: string
   newRelicLicenseKey: string
+
+  rateLimitMax: number
+  rateLimitWindow: number
+
+  corsOrigin: string[]
 }
 
 const platformConfig: PlatformConfig = {
   port: Number(process.env.APP_PORT) || 3000,
   nodeEnv: process.env.NODE_ENV,
+  isProduction: process.env.NODE_ENV === 'production',
 
   encryptionAlgorithm: process.env.API_ENCRYPTION_ALGORITHM,
   encryptionKey: process.env.API_ENCRYPTION_KEY,
@@ -35,6 +42,11 @@ const platformConfig: PlatformConfig = {
 
   newRelicLogApi: process.env.NEW_RELIC_LOG_API,
   newRelicLicenseKey: process.env.NEW_RELIC_LICENSE_KEY,
+
+  rateLimitMax: Number(process.env.RATE_LIMIT_MAX),
+  rateLimitWindow: Number(process.env.RATE_LIMIT_WINDOW),
+
+  corsOrigin: process.env.CORS_ORIGIN.split(',') || ['*'],
 }
 
 export default platformConfig

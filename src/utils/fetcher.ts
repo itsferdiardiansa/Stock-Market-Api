@@ -1,35 +1,20 @@
 import crypto from 'crypto'
 import zlib from 'zlib'
+import type { ParsedQs } from 'qs'
 import { getRedisClient } from '@/config/redis'
 import { decryptData, encryptData } from './encryption'
-import type { ApiResponseMetaFiltered, ApiFetchResponse } from '@/types/api'
 import APIClientFactory from './axios-instance'
-import { ParsedQs } from 'qs'
+import { formatResponse } from './response'
 
-/**
- * Response API helper
- */
-const fetchResponse = <TData = {}>(data: TData, metaResponse?: ApiResponseMetaFiltered): ApiFetchResponse<TData> => ({
-  meta: {
-    cache: false,
-    staleTime: 0,
-    ...metaResponse,
-  },
-  body: data,
-})
+type CacheOptions = {
+  prefix: string
+  time: number
+}
 
 /**
  * Utility for requesting data from API with Redis
  */
-const fetchData = async (
-  baseUrl: string,
-  endpoint: string,
-  params: ParsedQs,
-  cache: {
-    prefix: string
-    time: number
-  }
-) => {
+const fetchData = async (baseUrl: string, endpoint: string, params: ParsedQs, cache: CacheOptions) => {
   const redisClient = getRedisClient()
 
   const queryPart = JSON.stringify(params) || 'no-query'
@@ -46,10 +31,13 @@ const fetchData = async (
 
       const staleTime = Date.now() - parsedData.cachedAt
 
-      return fetchResponse(parsedData.data, {
-        cache: true,
-        lastUpdated: new Date(parsedData.cachedAt).toLocaleString(),
-        staleTime,
+      return formatResponse(200, {
+        meta: {
+          cache: true,
+          lastUpdated: new Date(parsedData.cachedAt).toLocaleString(),
+          staleTime,
+        },
+        body: parsedData.data,
       })
     }
 
@@ -64,17 +52,16 @@ const fetchData = async (
     const encryptedData = encryptData(compressedData)
     await redisClient.setEx(cacheKey, cache.time, encryptedData)
 
-    return fetchResponse(response.data)
+    return formatResponse(response.status, { body: response.data })
   } catch (error) {
     const responseData = error.response?.data
     const message = typeof responseData === 'object' ? Object.values(responseData) : responseData
-    throw {
-      status: error.status,
-      ...fetchResponse({
+    throw formatResponse(error.status, {
+      body: {
         code: error?.code ?? null,
         message: message ?? error.message,
-      }),
-    }
+      },
+    })
   }
 }
 

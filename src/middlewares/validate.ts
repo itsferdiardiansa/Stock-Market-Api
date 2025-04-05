@@ -1,7 +1,8 @@
-import { createResponse } from '@/utils/response'
 import type { NextFunction, Request, Response } from 'express'
 import { Schema } from 'joi'
 import logger from '@/utils/logger'
+import { formatResponse, sendResponse } from '@/utils/response'
+import { ValidatedRequest } from '@/types/validated-request'
 
 const validate = (schema: Schema) => {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -12,20 +13,19 @@ const validate = (schema: Schema) => {
     })
 
     if (error) {
-      const responseData = {
+      const responseData = formatResponse(400, {
         body: error.details.map(item => ({
           field: item.path.join('.'),
           message: item.message,
           type: item.type,
         })),
-      }
+      })
 
       logger.error(responseData, 'Validation Error')
-      res.json(createResponse(400, responseData))
-      return
+      return sendResponse(responseData, { req, res })
     }
 
-    req.query = value // Sanitize
+    ;(req as ValidatedRequest).validatedQuery = value
     next()
   }
 }

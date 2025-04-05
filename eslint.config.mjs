@@ -38,7 +38,6 @@ export default defineConfig([
       'linebreak-style': ['error', 'unix'],
       'no-dupe-keys': ['error'],
       'no-duplicate-case': ['error'],
-      'no-extra-semi': ['warn'],
       'no-labels': ['error'],
       'no-mixed-spaces-and-tabs': [2, 'smart-tabs'],
       'no-redeclare': ['warn'],

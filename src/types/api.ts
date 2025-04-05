@@ -1,20 +1,23 @@
 import { v4 as uuidv4 } from 'uuid'
 import { ParsedQs } from 'qs'
-import type { StatusMessages } from '@root/src/constants/status-messages'
+import type { STATUS_MESSAGES } from '@root/src/constants/status-messages'
 
-export type ApiResponseMeta = {
+export type StatusCodes = keyof typeof STATUS_MESSAGES
+
+export type ApiResponseMeta = Partial<{
   _id: ReturnType<typeof uuidv4>
   cache: boolean
   staleTime: number
-  status: StatusMessages
+  status: StatusCodes
   message: string
   version: string
   lastUpdated: string
-  timestamp?: number
-  rateLimit?: number | null
-}
+  options: {
+    rateLimit: number | null
+  }
+}>
 
-export type ApiResponseMetaFiltered = Pick<ApiResponseMeta, 'lastUpdated' | 'staleTime' | 'cache' | 'timestamp'>
+export type ApiResponseMetaFiltered = Pick<ApiResponseMeta, 'lastUpdated' | 'staleTime' | 'cache'>
 
 export type ApiFetchResponse<T = {}> = {
   meta: ApiResponseMetaFiltered

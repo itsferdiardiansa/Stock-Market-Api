@@ -1,5 +1,7 @@
-import type { Request, Response } from 'express'
-import { handleRequest } from '@root/src/services/fmp-api.service'
+import type { Response } from 'express'
+import { fetchFmpData } from '@/services/fmp-api.service'
+import { sendResponse } from '@/utils/response'
+import { ValidatedRequest } from '@/types/validated-request'
 
 /**
  * Search by company name or symbol across multiple global markets.
@@ -7,10 +9,11 @@ import { handleRequest } from '@root/src/services/fmp-api.service'
  * @query {string} [query] - company symbol.
  * @query {string} [exchange].
  */
-export const getStockSymbol = async (req: Request, res: Response) => {
-  const { query } = req
+export const getStockSymbol = async (req: ValidatedRequest, res: Response) => {
+  const { validatedQuery } = req
+  const data = await fetchFmpData('search-symbol', { ...validatedQuery })
 
-  await handleRequest(res, 'search-symbol', { ...query })
+  sendResponse(data, { req, res })
 }
 
 /**
@@ -19,10 +22,11 @@ export const getStockSymbol = async (req: Request, res: Response) => {
  * @query {string} [query] - company symbol.
  * @query {string} [exchange]
  */
-export const getCompanyName = async (req: Request, res: Response) => {
-  const { query } = req
+export const getCompanyName = async (req: ValidatedRequest, res: Response) => {
+  const { validatedQuery } = req
+  const data = await fetchFmpData('search-name', { ...validatedQuery })
 
-  await handleRequest(res, 'search-name', { ...query })
+  sendResponse(data, { req, res })
 }
 
 /**
@@ -30,10 +34,11 @@ export const getCompanyName = async (req: Request, res: Response) => {
  *
  * @query {string} [cik]
  */
-export const getCIK = async (req: Request, res: Response) => {
-  const { query } = req
+export const getCIK = async (req: ValidatedRequest, res: Response) => {
+  const { validatedQuery } = req
+  const data = await fetchFmpData('search-cik', { ...validatedQuery })
 
-  await handleRequest(res, 'search-cik', { ...query })
+  sendResponse(data, { req, res })
 }
 
 /**
@@ -41,10 +46,11 @@ export const getCIK = async (req: Request, res: Response) => {
  *
  * @query {string} [cusip]
  */
-export const getCUSIP = async (req: Request, res: Response) => {
-  const { query } = req
+export const getCUSIP = async (req: ValidatedRequest, res: Response) => {
+  const { validatedQuery } = req
+  const data = await fetchFmpData('search-cusip', { ...validatedQuery })
 
-  await handleRequest(res, 'search-cusip', { ...query })
+  sendResponse(data, { req, res })
 }
 
 /**
@@ -52,10 +58,11 @@ export const getCUSIP = async (req: Request, res: Response) => {
  *
  * @query {string} [isin]
  */
-export const getISIN = async (req: Request, res: Response) => {
-  const { query } = req
+export const getISIN = async (req: ValidatedRequest, res: Response) => {
+  const { validatedQuery } = req
+  const data = await fetchFmpData('search-isin', { ...validatedQuery })
 
-  await handleRequest(res, 'search-isin', { ...query })
+  sendResponse(data, { req, res })
 }
 
 /**
@@ -63,10 +70,11 @@ export const getISIN = async (req: Request, res: Response) => {
  *
  * @Request
  */
-export const getCompanyScreener = async (req: Request, res: Response) => {
-  const { query } = req
+export const getCompanyScreener = async (req: ValidatedRequest, res: Response) => {
+  const { validatedQuery } = req
+  const data = await fetchFmpData('company-screener', { ...validatedQuery })
 
-  await handleRequest(res, 'company-screener', { ...query })
+  sendResponse(data, { req, res })
 }
 
 /**
@@ -74,8 +82,9 @@ export const getCompanyScreener = async (req: Request, res: Response) => {
  *
  * @query {string} [symbol]
  */
-export const getExchangeVariants = async (req: Request, res: Response) => {
-  const { query } = req
+export const getExchangeVariants = async (req: ValidatedRequest, res: Response) => {
+  const { validatedQuery } = req
+  const data = await fetchFmpData('search-exchange-variants', { ...validatedQuery })
 
-  await handleRequest(res, 'search-exchange-variants', { ...query })
+  sendResponse(data, { req, res })
 }

@@ -2,14 +2,13 @@ import axios from 'axios'
 import pino from 'pino'
 import platformConfig from '@/config/platform'
 
-const isProduction = platformConfig.nodeEnv === 'production'
 const newRelicLogApi = platformConfig.newRelicLogApi
 const newRelicLicenseKey = platformConfig.newRelicLicenseKey
 
 const logger = pino({
-  level: isProduction ? 'info' : 'debug',
+  level: platformConfig.isProduction ? 'info' : 'debug',
   formatters: { level: label => ({ level: label }) },
-  transport: isProduction
+  transport: platformConfig.isProduction
     ? undefined
     : {
         target: 'pino-pretty',
@@ -40,7 +39,7 @@ for (const level of ['info', 'error', 'fatal'] as const) {
   const originalMethod = logger[level].bind(logger)
   logger[level] = async (...args: LogParams) => {
     originalMethod(...args)
-    isProduction && sendToNewRelic(level, args.join(' '))
+    platformConfig.isProduction && sendToNewRelic(level, args.join(' '))
   }
 }
 

@@ -1,13 +1,14 @@
-import { createResponse } from '@/utils/response'
+import type { Request, Response } from 'express'
+import { formatResponse, sendResponse } from '@/utils/response'
 
-const notFoundHandler = (_, res) => {
-  res.json(
-    createResponse(404, {
-      body: {
-        message: 'Not Found',
-      },
-    })
-  )
+const notFoundHandler = (req: Request, res: Response) => {
+  const data = formatResponse(404, {
+    body: {
+      message: 'Not Found',
+    },
+  })
+
+  sendResponse(data, { req, res })
 }
 
 export default notFoundHandler
