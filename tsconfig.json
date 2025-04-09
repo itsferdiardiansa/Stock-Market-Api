@@ -2,9 +2,9 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "CommonJS",
-    "outDir": "./dist",
+    "outDir": "dist",
+    "rootDir": "src",
     "baseUrl": ".",
-    "rootDir": ".",
     "esModuleInterop": true,
     "moduleResolution": "node",
     "declaration": true,
@@ -22,19 +22,15 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@root/*": ["*"],
       "@/*": ["src/*"],
-      "@config/*": ["config/*"],
-      "@controllers/*": ["controllers/*"],
-      "@constants/*": ["constants/*"],
-      "@middlewares/*": ["middlewares/*"],
-      "@routes/*": ["routes/*"],
-      "@utils/*": ["util/*s"]
+      "@config/*": ["src/config/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@constants/*": ["src/constants/*"],
+      "@middlewares/*": ["src/middlewares/*"],
+      "@routes/*": ["src/routes/*"],
+      "@utils/*": ["src/utils/*"]
     }
   },
-  "include": [
-    "src/**/*",
-    "scripts/**/*.ts"
-  ],
+  "include": ["src"],
   "exclude": ["node_modules"]
 }

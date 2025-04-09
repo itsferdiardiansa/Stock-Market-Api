@@ -5,14 +5,19 @@ import cors from 'cors'
 import platformConfig from '@/config/platform'
 import { getRedisClient } from '@/config/redis'
 import { formatResponse, sendResponse } from '@/utils/response'
+import { asyncLocalStorage } from '@/context/request-context'
+import logger from '@/utils/logger'
 
 export const httpHeaders = () => {
-  return (_: Request, res: Response, next: NextFunction) => {
+  return (req: Request, res: Response, next: NextFunction) => {
     const requestId = uuid()
-    res.setHeader('X-Request-Id', requestId)
-    res.locals.requestId = requestId
+    const { path, query, ip, params } = req
+    const storageData = { requestId, path, query, ip, params }
 
-    next()
+    asyncLocalStorage.run(storageData, () => {
+      res.setHeader('X-Request-Id', requestId)
+      next()
+    })
   }
 }
 
@@ -57,6 +62,7 @@ export const rateLimiter = () => {
     res.setHeader('X-RateLimit-Reset', `${Math.floor(Date.now() / 1000) + ttl}`)
 
     if (current > MAX_REQUEST) {
+      logger.warn('HTTP - Rate limit exceeded')
       return sendResponse(
         formatResponse(429, {
           body: {

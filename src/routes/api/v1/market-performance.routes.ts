@@ -7,7 +7,7 @@ import {
   historicalSectorPerformanceSchema,
   historicalIndustryPerformanceSchema,
   sectorPESnapshotSchema,
-} from '@root/src/validators/market-performance.validate'
+} from '@/validators/market-performance.validate'
 import {
   getMostActives,
   getBiggestLosers,

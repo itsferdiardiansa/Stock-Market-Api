@@ -1,29 +1,16 @@
-import type { Request, Response, NextFunction } from 'express'
+import morgan from 'morgan'
+import { type TokenIndexer } from 'morgan'
 import logger from '@/utils/logger'
+import type { Request, Response } from 'express'
 
 export const httpLogger = () => {
-  return (req: Request, res: Response, next: NextFunction) => {
-    const start = process.hrtime.bigint()
-    const { method, originalUrl } = req
-    const requestId = res.getHeader('x-request-id') || 'unknown'
+  return morgan((tokens: TokenIndexer, req: Request, res: Response) => {
+    const statusCode = Number(tokens.status(req, res))
+    const logMessage = `[${tokens.method(req, res)}] ${tokens.url(req, res)} - ${statusCode} (${tokens['response-time'](req, res)}ms)`
+    const level = statusCode >= 400 ? 'error' : statusCode >= 300 ? 'warn' : 'info'
 
-    res.on('finish', () => {
-      const durationMs = Number(process.hrtime.bigint() - start) / 1_000_000
-      const statusCode = res.statusCode
-      const level = statusCode >= 500 ? 'error' : statusCode >= 400 ? 'warn' : 'info'
+    logger[level](logMessage)
 
-      logger[level](
-        {
-          requestId,
-          method,
-          url: originalUrl,
-          statusCode,
-          durationMs: durationMs.toFixed(2),
-        },
-        `[${method}] ${originalUrl} - ${statusCode} (${durationMs.toFixed(0)}ms)`
-      )
-    })
-
-    next()
-  }
+    return null
+  })
 }

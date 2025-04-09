@@ -21,11 +21,12 @@ const validate = (schema: Schema) => {
         })),
       })
 
-      logger.error(responseData, 'Validation Error')
+      logger.error(responseData, 'HTTP - (ValidationFailed) Query parameters did not match expected schema')
       return sendResponse(responseData, { req, res })
     }
 
     ;(req as ValidatedRequest).validatedQuery = value
+    // req.query = value
     next()
   }
 }

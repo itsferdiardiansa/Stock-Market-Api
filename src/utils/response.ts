@@ -1,7 +1,8 @@
 import type { Response, Request } from 'express'
-import pkgJson from '@root/package.json'
 import { STATUS_MESSAGES } from '@/constants/status-messages'
 import type { ApiCustomResponse, StatusCodes } from '@/types/api'
+import { getRequestContext } from '@/context/request-context'
+import logger from './logger'
 
 export const formatResponse = (
   statusCode: StatusCodes,
@@ -18,7 +19,7 @@ export const formatResponse = (
       cache: false,
       staleTime: 0,
       lastUpdated: null,
-      version: pkgJson.version,
+      version: '1.0.0',
       ...responseData.meta,
       ...(options?.rateLimit && { rateLimit: options.rateLimit }),
     },
@@ -34,8 +35,12 @@ export const sendResponse = (
   }
 ) => {
   const { res } = params
-  const requestId = res.locals.requestId
+  const { requestId } = getRequestContext()
   const { meta, body } = responseData
+
+  if (meta.status >= 400) {
+    logger.error({ meta, body }, 'HTTP - Response Sent')
+  }
 
   res.status(meta.status).json({
     meta: {

@@ -8,7 +8,7 @@ import logger from '@/utils/logger'
 const { apiUrl, apiKey, cacheTime } = platformConfig
 
 if (!apiUrl || !apiKey) {
-  logger.error('API_URL or API_KEY are not provided in .env')
+  logger.error('Server - API_URL or API_KEY are not provided in .env')
   process.exit(1)
 }
 

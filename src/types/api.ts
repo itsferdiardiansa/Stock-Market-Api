@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import { ParsedQs } from 'qs'
-import type { STATUS_MESSAGES } from '@root/src/constants/status-messages'
+import type { STATUS_MESSAGES } from '@/constants/status-messages'
 
 export type StatusCodes = keyof typeof STATUS_MESSAGES
 
