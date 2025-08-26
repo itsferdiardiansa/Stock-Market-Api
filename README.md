@@ -4,22 +4,22 @@
 
 A  fake **Stock Market API** powered by **Node.js** and **Express**,, designed to fetch real-time and historical stock market data using **FMP API**.
 
-## ✨ Features  
+## Features  
 - Retrieve **financial statistics**, **earnings**, and **historical trends**  
 - Supports **pagination**, **error handling**, and **caching**  
 - Well-structured **RESTful API**  
 
 ---
 
-## 🚀 Installation  
+## Installation  
 
-### 1️⃣ **Clone the Repository**  
+### **Clone the Repository**  
 ```sh
 git clone https://github.com/itsferdiardiansa/stock-market-api.git
 cd stock-market-api
 ```
 
-**✨ Features**
+**Features**
 - Fetch real-time  **stock data**
 - Retrieve **financial statistics**, **earnings**, and **historical trends**
 - Supports **pagination**, **error handling**, and **caching**
@@ -27,16 +27,16 @@ cd stock-market-api
 
 ----------
 
-**🚀 Installation**
+**Installation**
 
 
-**1️⃣ Clone the Repository**
+**Clone the Repository**
 ```
 git clone https://github.com/itsferdiardiansa/stock-market-api.git
 cd stock-market-api
 ```
 
-**2️⃣ Install Dependencies**
+**Install Dependencies**
 Using  **pnpm**  (recommended):
 ```
 pnpm install
@@ -47,7 +47,7 @@ Or using  **npm**:
 npm install
 ```
 
-**3️⃣ Set Up Environment Variables**
+**Set Up Environment Variables**
 Create a  .env  file in the project root and configure:
 ```
 PORT=9000
@@ -57,9 +57,9 @@ NEXT_PUBLIC_API_URL=https://yahoo-finance15.p.rapidapi.com/api
 
 ----------
 
-**🔥 Running the Server**
+**Running the Server**
 
-**🚦 Start the API Server**
+**Start the API Server**
 
 ```
 pnpm start
@@ -73,26 +73,26 @@ npm run start
 
 **Server will be running at:**
 ```sh
-📍 http://localhost:9000
+http://localhost:9000
 ```
 ----------
 
-**🛠 API Endpoints**
+**API Endpoints**
 
 **Stock Data**
 
-**✅ Get Stock Market Data**
+**Get Stock Market Data**
 
 ```
 GET /api/v1/markets/stock/modules?ticker=AAPL&module=financial-data
 ```
 
-📌 **Query Parameters:**
+**Query Parameters:**
 
 •  ticker  _(required)_: The stock ticker symbol (e.g.,  AAPL)
 • module _(required)_: Data type (financial-data, earnings, profile, etc.)
 
-📌 **Example Response:**
+**Example Response:**
 ```
 {
   "meta": {
@@ -114,19 +114,19 @@ GET /api/v1/markets/stock/modules?ticker=AAPL&module=financial-data
 
 ----------
 
-**📈 Market Data**
+**Market Data**
 
-**✅ Get Market Tickers**
+**Get Market Tickers**
 
 ```
 GET /api/v2/markets/tickers?page=1&type=STOCKS
 ```
 
-📌 **Query Parameters:**
+**Query Parameters:**
 •  page  _(optional)_: Pagination page number (default:  1)
 •  type  _(optional)_: Filter by type (STOCKS,  CRYPTO,  FOREX)
 
-📌 **Example Response:**
+**Example Response:**
 ```
 {
   "meta": {
@@ -153,52 +153,52 @@ GET /api/v2/markets/tickers?page=1&type=STOCKS
 
 ----------
 
-**🏗 Project Structure**
+**Project Structure**
 ```
-📂 stock-market-api
- ┣ 📂 data
- ┃ ┣ 📜 financial-data.json
- ┃ ┣ 📜 earnings.json
- ┃ ┗ 📜 profile.json
- ┣ 📂 routes
- ┃ ┣ 📜 stockRoutes.js
- ┃ ┣ 📜 marketRoutes.js
- ┃ ┗ 📜 index.js
- ┣ 📂 utils
- ┃ ┗ 📜 responseFormatter.js
- ┣ 📜 .env
- ┣ 📜 .gitignore
- ┣ 📜 package.json
- ┣ 📜 server.js
- ┗ 📜 README.md
+stock-market-api
+ ┣ data
+ ┃ ┣ financial-data.json
+ ┃ ┣ earnings.json
+ ┃ ┗ profile.json
+ ┣ routes
+ ┃ ┣ stockRoutes.js
+ ┃ ┣ marketRoutes.js
+ ┃ ┗ index.js
+ ┣ utils
+ ┃ ┗ responseFormatter.js
+ ┣ .env
+ ┣ .gitignore
+ ┣ package.json
+ ┣ server.js
+ ┗ README.md
 ```
 
 ----------
 
-**⚡ Troubleshooting**
+**Troubleshooting**
 
-**1️⃣ Issue: Cannot find module 'json-server'**
+**Issue: Cannot find module 'json-server'**
 
-🔹  **Solution:**  Reinstall dependencies
+**Solution:**  Reinstall dependencies
 
 ```
 pnpm install
 ```
 
-**2️⃣ Issue: .env Variables Not Loaded**
+**Issue: .env Variables Not Loaded**
 
-🔹  **Solution:**  Ensure  .env  file exists and restart the server
+**Solution:**  Ensure  .env  file exists and restart the server
 
 ```
 pnpm start
 ```
 
-**3️⃣ Issue: API Rate Limit Exceeded**
+**Issue: API Rate Limit Exceeded**
 
-🔹  **Solution:**  Upgrade to a  **paid plan**  on  **RapidAPI**  or add multiple API keys.
+**Solution:**  Upgrade to a  **paid plan**  on  **RapidAPI**  or add multiple API keys.
 
 ----------
 
-**📜 License**
+**License**
 
-This project is  **MIT Licensed**. 🚀
+This project is  **MIT Licensed**.
