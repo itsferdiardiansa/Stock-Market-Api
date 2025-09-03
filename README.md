@@ -88,9 +88,9 @@ GET /api/v1/markets/stock/modules?ticker=AAPL&module=financial-data
 ```
 
 **Query Parameters:**
+- ticker  _(required)_: The stock ticker symbol (e.g.,  AAPL)
+- module _(required)_: Data type (financial-data, earnings, profile, etc.)
 
-•  ticker  _(required)_: The stock ticker symbol (e.g.,  AAPL)
-• module _(required)_: Data type (financial-data, earnings, profile, etc.)
 
 **Example Response:**
 ```
@@ -123,8 +123,8 @@ GET /api/v2/markets/tickers?page=1&type=STOCKS
 ```
 
 **Query Parameters:**
-•  page  _(optional)_: Pagination page number (default:  1)
-•  type  _(optional)_: Filter by type (STOCKS,  CRYPTO,  FOREX)
+- page  _(optional)_: Pagination page number (default:  1)
+- type  _(optional)_: Filter by type (STOCKS)
 
 **Example Response:**
 ```
