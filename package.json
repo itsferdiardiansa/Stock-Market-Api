@@ -24,10 +24,6 @@
     "express",
     "redis"
   ],
-  "author": {
-    "email": "ferdiardiansa@gmail.com",
-    "name": "Ferdi Ardiansa"
-  },
   "engines": {
     "node": ">=23"
   },
