@@ -25,7 +25,7 @@
     "redis"
   ],
   "engines": {
-    "node": ">=23"
+    "node": ">=23.11.1"
   },
   "dependencies": {
     "@redis/graph": "^1.1.1",
